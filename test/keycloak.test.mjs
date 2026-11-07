@@ -37,7 +37,9 @@ async function fixture() {
   const lookupPrincipal = createRuntimePrincipalLookup({
     getBinding: async (identity) => {
       bindingCalls++;
-      assert.deepEqual(identity, { issuer, subject, clientId });
+      if (identity.issuer !== issuer || identity.subject !== subject || identity.clientId !== clientId) {
+        return null;
+      }
       return binding;
     },
     getActor: async (id) => {
