@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aionsystems.si/sentinel/schemas/audit-event.v1.schema.json",
+  "title": "AION Sentinel authorization decision metadata v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "eventId", "occurredAt", "category", "outcome", "reason",
+    "principalId", "actorId", "tenantId", "action", "resource", "correlationId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "eventId": { "type": "string", "format": "uuid" },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "category": { "const": "authorization" },
+    "outcome": { "enum": ["allow", "deny"] },
+    "reason": { "type": "string", "pattern": "^[a-z_]{3,48}$" },
+    "principalId": { "$ref": "#/$defs/optionalId" },
+    "actorId": { "$ref": "#/$defs/optionalId" },
+    "tenantId": { "$ref": "#/$defs/optionalId" },
+    "action": { "$ref": "#/$defs/optionalId" },
+    "resource": { "$ref": "#/$defs/optionalId" },
+    "correlationId": { "$ref": "#/$defs/optionalId" }
+  },
+  "$defs": {
+    "optionalId": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 1, "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:/-]+$" }
+      ]
+    }
+  }
+}
