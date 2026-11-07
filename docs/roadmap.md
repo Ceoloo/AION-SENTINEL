@@ -29,12 +29,17 @@
 
 ## Phase 1 — provider decision and identity integration
 
-- [ ] Evaluate Keycloak vs ZITADEL for sovereign deployment.
-- [ ] Add external OIDC discovery/JWKS verifier; pin issuer, audience,
-      allowed algorithms, token type and key rotation/revocation behavior.
-- [ ] Map verified subject to Runtime Principal and durable Actor.
-- [ ] Negative tests for forged, expired, wrong-audience, replayed and
-      revoked identities, plus MFA/privileged human access.
+- [x] Select Keycloak as the upstream OIDC identity provider (user decision).
+- [x] Implement strict RS256 signed access-token verification with an offline JWKS test suite.
+- [x] Implement durable Runtime Principal/Actor mapping adapter contract (no live DB integration).
+- [x] Pin issuer, audience, algorithm, access-token type and intended client;
+      derive HTTPS JWKS endpoint from configured Keycloak realm.
+- [ ] Prove JWKS key rotation and live Keycloak interoperability in staging.
+- [x] Add exact verified issuer/sub/client to Runtime Principal/Actor lookup contract.
+- [ ] Implement AION Data-backed binding registry and opt-in Runtime gateway integration.
+- [x] Offline negative tests for signature, wrong issuer/audience/client,
+      expiry, token type, tenant spoof and durable binding disable.
+- [ ] Validate replay/session revocation strategy and MFA/privileged human access in staging.
 - [ ] Tenant and agent identity lifecycle / offboarding / break-glass runbook.
 
 ## Phase 2 — Runtime adapter and durable audit
