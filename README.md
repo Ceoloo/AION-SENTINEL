@@ -42,11 +42,24 @@ handoff. This is guidance and planning, **not** an audit-complete claim.
 Full audits require explicit scope, independent validation and isolated
 offline execution. Do not store sensitive audit results in this public repo.
 
+## Identity v0.2 — Keycloak (draft)
+
+The [Keycloak integration guide](docs/keycloak-v02.md) documents verified
+RS256 access-token validation, pinned realm issuer and audience, explicit
+client allowlist, and **live durable Principal/Actor mapping** through
+`createRuntimePrincipalLookup()`. Authorization/tenant roles are never
+trusted from JWT claims. No Keycloak instance, mapping table, or Runtime
+gateway cutover is deployed; production remains disabled pending
+staging integration and security review.
+
+Dependencies are locked; run `npm ci --ignore-scripts` before testing.
+
 ## Run locally
 
 Requires Node.js 22+. No external packages, keys or accounts are necessary.
 
 ~~~bash
+npm ci --ignore-scripts
 npm run check
 npm start
 curl -i http://127.0.0.1:8085/health/live
@@ -90,7 +103,7 @@ authorization or human approval requirements.
 
 ## Future modules (not built)
 
-Sentinel Identity (upstream OIDC); Sentinel Access (Runtime policy seam);
+Sentinel Identity (Keycloak token verifier and Runtime mapping seam now drafted); Sentinel Access (Runtime policy seam);
 Sentinel Agent Trust (workload identity); Sentinel Observe (OpenTelemetry);
 Sentinel Audit (durable evidence). Keep commercial product packaging separate
 from the canonical AION six-repo architecture.

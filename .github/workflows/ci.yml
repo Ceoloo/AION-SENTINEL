@@ -14,9 +14,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install pinned JWT verification dependency
-        run: npm install --no-audit --no-fund --ignore-scripts
-      - name: Print generated dependency lock for review (temporary)
-        run: node -e "console.log('LOCKFILE_MARKER=' + JSON.stringify(require('./package-lock.json')))"
+      - name: Install dependencies from reviewed lockfile
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Validate syntax and run contract tests
         run: npm run check

@@ -11,12 +11,12 @@ must create the upstream-schema `coverage-ledger.json`; this map does
 
 | Unit | Current Sentinel entrypoint or future surface | Primary trust boundary | Attack classes / source companion | Current state |
 | --- | --- | --- | --- | --- |
-| SA-01 | `src/identity.mjs` verified identity adapter | Untrusted credential -> verified principal | Auth protocol, forged identity, verifier outage; WEB-PROTOCOL-AND-AUTH | Adapter seam only; upstream IdP absent |
-| SA-02 | `src/identity.mjs` tenant selector | Principal's durable tenant grants -> resource scope | Cross-tenant query, actor confusion; DATA-ISOLATION-AND-LIFECYCLE | Local negative tests exist; no full audit |
+| SA-01 | `src/identity.mjs` verified identity adapter | Untrusted credential -> verified principal | Auth protocol, forged identity, verifier outage; WEB-PROTOCOL-AND-AUTH | Offline signed-JWT verifier and mapping seam; live IdP absent |
+| SA-02 | `src/identity.mjs` tenant selector | Principal's durable tenant grants -> resource scope | Cross-tenant query, actor confusion; DATA-ISOLATION-AND-LIFECYCLE | Local negative tests + mapped Principal fixture; no live DB or full audit |
 | SA-03 | `src/identity.mjs` permission decision | Verified actor -> Runtime/Core policy -> side effect | Confused deputy, TOCTOU, approval/action binding; AI-AND-LLM | Runtime adapter not implemented |
 | SA-04 | `src/audit.mjs` / schema | Sensitive request -> allowlisted audit metadata -> durable evidence | Secret leakage, missing/forged event, audit outage | Schema + local mock only; durable store absent |
 | SA-05 | `src/server.mjs` | Untrusted HTTP -> process routing | Header/request framing, method/path confusion, availability; WEB-PROTOCOL-AND-AUTH | Health-only service; no auth API |
-| SA-06 | Future OIDC login and session lifecycle | IdP assertions -> mapped Runtime identity | Issuer/audience, algorithm, nonce, PKCE, JWKS rotation, session revocation, MFA | Not implemented; mandatory before launch |
+| SA-06 | Future OIDC login and session lifecycle | IdP assertions -> mapped Runtime identity | Issuer/audience, algorithm, nonce, PKCE, JWKS rotation, session revocation, MFA | JWT verification library implemented; live realm/SSO and revocation staging tests absent |
 | SA-07 | Future agent/workload identity & MCP | Delegated tool input -> executable capability | Prompt injection to sinks, model output, MCP namespace, tool schema, budget, retries; AI-AND-LLM | Not implemented; mandatory before agent use |
 | SA-08 | Future tenant data/backup/export | Tenant-restricted state -> database/cache/export | RLS, cache/query scope, backup restore, deletion/revocation; DATA-ISOLATION-AND-LIFECYCLE | No Sentinel DB; AION Data ownership remains |
 | SA-09 | GitHub workflow and dependency lifecycle | Repository/PR input -> trusted build/release | Untrusted CI permissions, artifact poisoning, action/dependency provenance; SUPPLY-CHAIN-AND-RELEASE | CI syntax/tests exist; no release audit |
