@@ -31,6 +31,17 @@ remain authoritative until a new decision is accepted.
 - [Architecture](docs/architecture.md), [roadmap](docs/roadmap.md),
   [security policy](SECURITY.md).
 
+## Security audit methodology
+
+Security reviews use the [AION Sentinel audit baseline](docs/security-audit/BASELINE.md),
+adapted from Cloudflare's open-source security-audit skill at a pinned
+revision. The [coverage map](docs/security-audit/COVERAGE-MAP.md) tracks
+initial attack surfaces and explicit gaps; the
+[run template](docs/security-audit/RUN-TEMPLATE.md) describes the evidence
+handoff. This is guidance and planning, **not** an audit-complete claim.
+Full audits require explicit scope, independent validation and isolated
+offline execution. Do not store sensitive audit results in this public repo.
+
 ## Run locally
 
 Requires Node.js 22+. No external packages, keys or accounts are necessary.

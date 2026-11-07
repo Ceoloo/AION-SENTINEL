@@ -9,7 +9,23 @@
 - [x] Versioned allowlisted authorization event schema.
 - [x] Proposed ownership ADR and threat inventory.
 - [ ] Human review of proposed ADR and Runtime contract.
-- [ ] CI result confirmed on GitHub.
+- [x] CI result confirmed on GitHub for initial foundation commit.
+- [x] Documented Cloudflare-derived baseline audit method and initial
+      security coverage map (methodology only; no full audit performed).
+- [ ] Run an independently validated, specifically authorized quick audit
+      against a pinned Sentinel SHA and track unverified boundaries.
+
+## Audit methodology gates (cross-cutting)
+
+- [ ] Review and accept the proposed adoption of the baseline in AION's
+      canonical security docs before declaring it mandatory holding-wide.
+- [ ] Review each new trust boundary using the source-first
+      [audit baseline](security-audit/BASELINE.md) and
+      [coverage map](security-audit/COVERAGE-MAP.md).
+- [ ] Independently validate candidate findings; keep release blocked for
+      confirmed critical/high issues until remediation is verified.
+- [ ] Document scope, source SHA, out-of-scope systems and unresolved
+      validation gaps in a private audit run before production approval.
 
 ## Phase 1 — provider decision and identity integration
 

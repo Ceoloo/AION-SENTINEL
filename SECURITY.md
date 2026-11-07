@@ -15,3 +15,17 @@ as an identity provider, token service, audit system or authorization oracle.
   Security tab if private vulnerability reporting is enabled, otherwise
   contact a repository maintainer through an agreed private channel.
 - Do not include secrets or exploit details in public issues.
+
+## Source audit baseline
+
+For code reviews and authorized security assessments, use the
+[source-first audit baseline](docs/security-audit/BASELINE.md) with the
+[coverage inventory](docs/security-audit/COVERAGE-MAP.md). A documented
+methodology, a successful CI job or an unverified issue report is not
+proof of security. Store security findings and local reproductions in
+restricted-access audit storage, not a public issue or PR.
+
+No audit guidance authorizes scanning AION production endpoints or
+using customer data; tests must be bounded to an isolated offline
+environment with dummy identities. Deployment-state checks require
+operator approval and must remain non-intrusive.
