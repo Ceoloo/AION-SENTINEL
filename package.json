@@ -1,13 +1,14 @@
 {
   "name": "@aion/sentinel",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "AION Sentinel identity, trust and observability integration foundation",
+  "description": "AION Sentinel verified Keycloak identity and trust integration foundation",
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node src/server.mjs",
     "test": "node --test",
-    "check": "node --check src/audit.mjs && node --check src/identity.mjs && node --check src/server.mjs && node --test"
-  }
+    "check": "node --check src/audit.mjs && node --check src/identity.mjs && node --check src/keycloak.mjs && node --check src/server.mjs && node --test"
+  },
+  "dependencies": { "jose": "6.2.15" }
 }
